@@ -14,15 +14,68 @@
 
   <main class="container">
     <h2>My Projects</h2>
-    <div class="projects">
-      <a class="project-card" href="/project-1/">
-        <h3>Project 1</h3>
-        <p>Placeholder for my first project. Click to visit.</p>
-      </a>
-      <a class="project-card" href="/project-2/">
-        <h3>Project 2</h3>
-        <p>Placeholder for my second project. Click to visit.</p>
-      </a>
+    <div class="bubble-scene">
+      <svg class="bubble-svg" viewBox="0 0 800 600" role="group"
+           aria-label="Projects constellation: Project 1 and Project 2 float around a central Projects bubble">
+        <defs>
+          <radialGradient id="centerGrad" cx="35%" cy="30%" r="80%">
+            <stop offset="0%" stop-color="#a78bfa" />
+            <stop offset="55%" stop-color="#7c3aed" />
+            <stop offset="100%" stop-color="#4c1d95" />
+          </radialGradient>
+          <radialGradient id="projGrad1" cx="35%" cy="30%" r="80%">
+            <stop offset="0%" stop-color="#67e8f9" />
+            <stop offset="55%" stop-color="#06b6d4" />
+            <stop offset="100%" stop-color="#155e75" />
+          </radialGradient>
+          <radialGradient id="projGrad2" cx="35%" cy="30%" r="80%">
+            <stop offset="0%" stop-color="#f9a8d4" />
+            <stop offset="55%" stop-color="#ec4899" />
+            <stop offset="100%" stop-color="#9d174d" />
+          </radialGradient>
+          <radialGradient id="glossGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.5" />
+            <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+          </radialGradient>
+        </defs>
+
+        <!-- connecting lines (drawn behind the bubbles) -->
+        <line class="link-line" x1="400" y1="300" x2="400" y2="60" />
+        <line class="link-line" x1="400" y1="300" x2="400" y2="540" />
+
+        <!-- central "Projects" bubble -->
+        <g class="center-bubble">
+          <circle cx="400" cy="300" r="105" fill="url(#centerGrad)" />
+          <ellipse cx="362" cy="252" rx="44" ry="28" fill="url(#glossGrad)" />
+          <text class="center-label" x="400" y="300" text-anchor="middle" dominant-baseline="central">Projects</text>
+        </g>
+
+        <!-- Project 1 -->
+        <a class="bubble-link" href="/project-1/" aria-label="Visit Project 1 site">
+          <g class="bubble bubble-1">
+            <circle class="focus-ring" cx="400" cy="60" r="61" fill="none" stroke="#ffffff" stroke-width="3" opacity="0" />
+            <g class="bubble-visual">
+              <circle class="bubble-circle" cx="400" cy="60" r="56" fill="url(#projGrad1)" />
+              <ellipse cx="378" cy="32" rx="24" ry="15" fill="url(#glossGrad)" />
+              <text class="bubble-label" x="400" y="48" text-anchor="middle" dominant-baseline="central">Project</text>
+              <text class="bubble-label bubble-num" x="400" y="74" text-anchor="middle" dominant-baseline="central">1</text>
+            </g>
+          </g>
+        </a>
+
+        <!-- Project 2 -->
+        <a class="bubble-link" href="/project-2/" aria-label="Visit Project 2 site">
+          <g class="bubble bubble-2">
+            <circle class="focus-ring" cx="400" cy="540" r="61" fill="none" stroke="#ffffff" stroke-width="3" opacity="0" />
+            <g class="bubble-visual">
+              <circle class="bubble-circle" cx="400" cy="540" r="56" fill="url(#projGrad2)" />
+              <ellipse cx="378" cy="512" rx="24" ry="15" fill="url(#glossGrad)" />
+              <text class="bubble-label" x="400" y="528" text-anchor="middle" dominant-baseline="central">Project</text>
+              <text class="bubble-label bubble-num" x="400" y="554" text-anchor="middle" dominant-baseline="central">2</text>
+            </g>
+          </g>
+        </a>
+      </svg>
     </div>
   </main>
 
