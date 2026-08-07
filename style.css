@@ -48,8 +48,8 @@ body {
 
 /* Bubble constellation scene */
 .bubble-scene {
-  background: #eef2f7;
-  border: 1px solid #e1e4e8;
+  background: #e9eef5;
+  border: 1px solid #d5dde8;
   border-radius: 12px;
   padding: 1rem;
   max-width: 34rem;
@@ -62,43 +62,31 @@ body {
   display: block;
 }
 
+/* connecting lines — solid and clearly visible, tinted per bubble */
 .link-line {
-  stroke: #94a3b8;
   stroke-width: 3;
-  stroke-dasharray: 1 10;
   stroke-linecap: round;
-  opacity: 0.7;
 }
 
-.center-bubble {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: breathe 6s ease-in-out infinite;
-  filter: drop-shadow(0 0 18px rgba(124, 58, 237, 0.45));
+.link-1 {
+  stroke: #0891b2;
+  stroke-opacity: 0.5;
+}
+
+.link-2 {
+  stroke: #db2777;
+  stroke-opacity: 0.5;
 }
 
 .center-label {
   font-size: 36px;
   font-weight: 700;
   letter-spacing: 1px;
-  fill: #ffffff;
+  fill: #1e293b;
   font-family: inherit;
-}
-
-.bubble {
-  animation: floaty 5s ease-in-out infinite;
-}
-
-.bubble-1 {
-  animation-duration: 5.5s;
-  animation-delay: 0.2s;
-  filter: drop-shadow(0 0 14px rgba(6, 182, 212, 0.5));
-}
-
-.bubble-2 {
-  animation-duration: 4.8s;
-  animation-delay: 1.1s;
-  filter: drop-shadow(0 0 14px rgba(236, 72, 153, 0.5));
+  paint-order: stroke;
+  stroke: rgba(255, 255, 255, 0.75);
+  stroke-width: 2px;
 }
 
 .bubble-link {
@@ -121,36 +109,22 @@ body {
 
 .bubble-link:hover .bubble-visual {
   transform: scale(1.12);
-  filter: brightness(1.15);
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
 }
 
 .bubble-label {
   font-size: 19px;
   font-weight: 600;
-  fill: #ffffff;
+  fill: #1e293b;
   font-family: inherit;
+  paint-order: stroke;
+  stroke: rgba(255, 255, 255, 0.75);
+  stroke-width: 2px;
 }
 
 .bubble-num {
   font-size: 24px;
   font-weight: 700;
-}
-
-@keyframes floaty {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
-}
-
-@keyframes breathe {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .bubble,
-  .center-bubble {
-    animation: none;
-  }
 }
 
 .site-footer {
