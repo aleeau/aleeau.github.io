@@ -84,9 +84,6 @@ body {
   letter-spacing: 1px;
   fill: #1e293b;
   font-family: inherit;
-  paint-order: stroke;
-  stroke: rgba(255, 255, 255, 0.75);
-  stroke-width: 2px;
 }
 
 .bubble-link {
@@ -101,15 +98,23 @@ body {
   opacity: 1;
 }
 
-.bubble-visual {
-  transform-box: fill-box;
-  transform-origin: center;
-  transition: transform 0.25s ease, filter 0.25s ease;
+/* hover feedback uses only presentation attributes — no transforms or
+   filters anywhere in the animated chain, so the text can never desync
+   from its bubble during the SMIL animation */
+.bubble-link:hover .bubble-1 .bubble-circle {
+  stroke: rgba(103, 232, 249, 0.95);
 }
 
-.bubble-link:hover .bubble-visual {
-  transform: scale(1.12);
-  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+.bubble-link:hover .bubble-2 .bubble-circle {
+  stroke: rgba(249, 168, 212, 0.95);
+}
+
+.bubble-link:hover .bubble-circle {
+  stroke-width: 4;
+}
+
+.bubble-link:hover .bubble-gloss {
+  opacity: 0.95;
 }
 
 .bubble-label {
@@ -117,9 +122,6 @@ body {
   font-weight: 600;
   fill: #1e293b;
   font-family: inherit;
-  paint-order: stroke;
-  stroke: rgba(255, 255, 255, 0.75);
-  stroke-width: 2px;
 }
 
 .bubble-num {
