@@ -305,7 +305,7 @@
         pt.x = r.left + r.width / 2;
         pt.y = r.top + r.height / 2;
         var p = pt.matrixTransform(inv);
-        return { x: p.x, y: p.y };
+        return { x: (p.x - tx) / scale, y: (p.y - ty) / scale };
       }
 
       // Draw a line rim-to-rim between bubble centers a and b.
