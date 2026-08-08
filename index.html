@@ -15,8 +15,9 @@
   <main class="container">
     <h2>My Projects</h2>
     <div class="bubble-scene">
+      <button class="scene-reset" type="button">Reset view</button>
       <svg class="bubble-svg" viewBox="0 0 800 600" role="group"
-           aria-label="Projects constellation: Project 1 and Project 2 float around a central Projects bubble">
+           aria-label="Projects constellation: Project 1 and Project 2 float around a central Projects bubble. Drag to pan, scroll or pinch to zoom.">
         <defs>
           <!-- translucent tinted fills: transparent center, colored hue toward the rim -->
           <radialGradient id="centerGrad" cx="50%" cy="50%" r="50%">
@@ -43,51 +44,68 @@
           </radialGradient>
         </defs>
 
-        <!-- connecting lines (drawn behind the bubbles, rim to rim) -->
-        <line class="link-line link-1" x1="400" y1="195" x2="400" y2="116" />
-        <line class="link-line link-2" x1="400" y1="405" x2="400" y2="484" />
+        <!-- everything inside #scene is pannable / zoomable -->
+        <g id="scene">
+          <!-- connecting lines (drawn behind the bubbles, rim to rim) -->
+          <line class="link-line link-1" x1="400" y1="195" x2="400" y2="116" />
+          <line class="link-line link-2" x1="400" y1="405" x2="400" y2="484" />
 
-        <!-- central "Projects" bubble (breathes via SMIL animation) -->
-        <g transform="translate(400, 300)">
-          <g class="center-bubble">
-            <animateTransform attributeName="transform" type="scale" values="1; 1.05; 1" dur="6s" repeatCount="indefinite" />
-            <circle cx="0" cy="0" r="105" fill="url(#centerGrad)" stroke="rgba(124,58,237,0.55)" stroke-width="2.5" />
-            <ellipse cx="-38" cy="-48" rx="44" ry="28" fill="url(#glossGrad)" />
-            <text class="center-label" x="0" y="0" text-anchor="middle" dominant-baseline="central">Projects</text>
+          <!-- central "Projects" bubble: faster breathing + gentle left/right drift -->
+          <g transform="translate(400, 300)">
+            <g>
+              <animateTransform attributeName="transform" type="translate"
+                values="0 0; 22 0; 0 0; -22 0; 0 0" dur="4.5s" repeatCount="indefinite" />
+              <g class="center-bubble">
+                <animateTransform attributeName="transform" type="scale" values="1; 1.05; 1" dur="2.4s" repeatCount="indefinite" />
+                <circle cx="0" cy="0" r="105" fill="url(#centerGrad)" stroke="rgba(124,58,237,0.55)" stroke-width="2.5" />
+                <ellipse cx="-38" cy="-48" rx="44" ry="28" fill="url(#glossGrad)" />
+                <text class="center-label" x="0" y="0" text-anchor="middle" dominant-baseline="central">Projects</text>
+              </g>
+            </g>
           </g>
+
+          <!-- Project 1: drifts left/right (outer group) and floats up/down (inner group), faster -->
+          <a class="bubble-link" href="/project-1/" aria-label="Visit Project 1 site">
+            <g class="bubble-drift">
+              <animateTransform attributeName="transform" type="translate"
+                values="0 0; 34 0; 0 0; -34 0; 0 0" dur="3.8s" begin="0.8s" repeatCount="indefinite" />
+              <g class="bubble bubble-1">
+                <animateTransform attributeName="transform" type="translate"
+                  values="0 0; 0 -16; 0 0" dur="2.1s" begin="0.2s" repeatCount="indefinite" />
+                <circle class="focus-ring" cx="400" cy="60" r="62" fill="none" stroke="#1d4ed8" stroke-width="3" opacity="0" />
+                <g class="bubble-visual">
+                  <circle class="bubble-circle" cx="400" cy="60" r="56" fill="url(#projGrad1)" stroke="rgba(6,182,212,0.6)" stroke-width="2.5" />
+                  <ellipse class="bubble-gloss" cx="378" cy="32" rx="26" ry="16" fill="url(#glossGrad)" />
+                  <text class="bubble-label" text-anchor="middle" dominant-baseline="central">
+                    <tspan x="400" y="48">Project</tspan>
+                    <tspan class="bubble-num" x="400" y="74">1</tspan>
+                  </text>
+                </g>
+              </g>
+            </g>
+          </a>
+
+          <!-- Project 2: same motion, different timing so the bubbles stay out of sync -->
+          <a class="bubble-link" href="/project-2/" aria-label="Visit Project 2 site">
+            <g class="bubble-drift">
+              <animateTransform attributeName="transform" type="translate"
+                values="0 0; -28 0; 0 0; 28 0; 0 0" dur="5.1s" begin="1.6s" repeatCount="indefinite" />
+              <g class="bubble bubble-2">
+                <animateTransform attributeName="transform" type="translate"
+                  values="0 0; 0 -16; 0 0" dur="2.6s" begin="1.1s" repeatCount="indefinite" />
+                <circle class="focus-ring" cx="400" cy="540" r="62" fill="none" stroke="#1d4ed8" stroke-width="3" opacity="0" />
+                <g class="bubble-visual">
+                  <circle class="bubble-circle" cx="400" cy="540" r="56" fill="url(#projGrad2)" stroke="rgba(236,72,153,0.6)" stroke-width="2.5" />
+                  <ellipse class="bubble-gloss" cx="378" cy="512" rx="26" ry="16" fill="url(#glossGrad)" />
+                  <text class="bubble-label" text-anchor="middle" dominant-baseline="central">
+                    <tspan x="400" y="528">Project</tspan>
+                    <tspan class="bubble-num" x="400" y="554">2</tspan>
+                  </text>
+                </g>
+              </g>
+            </g>
+          </a>
         </g>
-
-        <!-- Project 1 (floats via SMIL animation) -->
-        <a class="bubble-link" href="/project-1/" aria-label="Visit Project 1 site">
-          <g class="bubble bubble-1">
-            <animateTransform attributeName="transform" type="translate" values="0 0; 0 -12; 0 0" dur="5.5s" begin="0.2s" repeatCount="indefinite" />
-            <circle class="focus-ring" cx="400" cy="60" r="62" fill="none" stroke="#1d4ed8" stroke-width="3" opacity="0" />
-            <g class="bubble-visual">
-              <circle class="bubble-circle" cx="400" cy="60" r="56" fill="url(#projGrad1)" stroke="rgba(6,182,212,0.6)" stroke-width="2.5" />
-              <ellipse class="bubble-gloss" cx="378" cy="32" rx="26" ry="16" fill="url(#glossGrad)" />
-              <text class="bubble-label" text-anchor="middle" dominant-baseline="central">
-                <tspan x="400" y="48">Project</tspan>
-                <tspan class="bubble-num" x="400" y="74">1</tspan>
-              </text>
-            </g>
-          </g>
-        </a>
-
-        <!-- Project 2 (floats via SMIL animation) -->
-        <a class="bubble-link" href="/project-2/" aria-label="Visit Project 2 site">
-          <g class="bubble bubble-2">
-            <animateTransform attributeName="transform" type="translate" values="0 0; 0 -12; 0 0" dur="4.8s" begin="1.1s" repeatCount="indefinite" />
-            <circle class="focus-ring" cx="400" cy="540" r="62" fill="none" stroke="#1d4ed8" stroke-width="3" opacity="0" />
-            <g class="bubble-visual">
-              <circle class="bubble-circle" cx="400" cy="540" r="56" fill="url(#projGrad2)" stroke="rgba(236,72,153,0.6)" stroke-width="2.5" />
-              <ellipse class="bubble-gloss" cx="378" cy="512" rx="26" ry="16" fill="url(#glossGrad)" />
-              <text class="bubble-label" text-anchor="middle" dominant-baseline="central">
-                <tspan x="400" y="528">Project</tspan>
-                <tspan class="bubble-num" x="400" y="554">2</tspan>
-              </text>
-            </g>
-          </g>
-        </a>
       </svg>
     </div>
   </main>
@@ -95,5 +113,194 @@
   <footer class="site-footer">
     <p>&copy; 2026 aleeau &middot; <a href="https://github.com/aleeau">GitHub</a></p>
   </footer>
+
+  <script>
+    (function () {
+      var svg = document.querySelector('.bubble-svg');
+      var scene = document.getElementById('scene');
+      var resetBtn = document.querySelector('.scene-reset');
+      if (!svg || !scene) return;
+
+      var MIN_SCALE = 0.4;
+      var MAX_SCALE = 4;
+      var DRAG_THRESHOLD = 4; // px before a press becomes a drag
+
+      var tx = 0, ty = 0, scale = 1;
+      var pointers = new Map();
+      var dragState = null;    // { startX, startY, origTx, origTy, moved }
+      var pinchState = null;   // { lastDist, lastCx, lastCy }
+      var suppressClick = false;
+      var suppressTimer = null;
+
+      var pt = svg.createSVGPoint();
+
+      function toViewBox(clientX, clientY) {
+        pt.x = clientX;
+        pt.y = clientY;
+        return pt.matrixTransform(svg.getScreenCTM().inverse());
+      }
+
+      function applyTransform() {
+        scene.setAttribute('transform',
+          'translate(' + tx + ' ' + ty + ') scale(' + scale + ')');
+      }
+
+      function clampScale(v) {
+        return Math.min(MAX_SCALE, Math.max(MIN_SCALE, v));
+      }
+
+      // Zoom so the viewBox point (cx, cy) stays fixed under the cursor.
+      function zoomAt(newScale, cx, cy) {
+        newScale = clampScale(newScale);
+        if (newScale === scale) return;
+        var lx = (cx - tx) / scale;
+        var ly = (cy - ty) / scale;
+        scale = newScale;
+        tx = cx - lx * scale;
+        ty = cy - ly * scale;
+        applyTransform();
+      }
+
+      // --- mouse wheel zoom ---
+      svg.addEventListener('wheel', function (e) {
+        e.preventDefault();
+        var factor = e.deltaY < 0 ? 1.12 : 1 / 1.12;
+        var p = toViewBox(e.clientX, e.clientY);
+        zoomAt(scale * factor, p.x, p.y);
+      }, { passive: false });
+
+      // --- pointer events: drag to pan, two fingers to pinch-zoom ---
+      svg.addEventListener('pointerdown', function (e) {
+        pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+        if (pointers.size === 1) {
+          dragState = {
+            startX: e.clientX,
+            startY: e.clientY,
+            origTx: tx,
+            origTy: ty,
+            moved: false
+          };
+        } else if (pointers.size === 2) {
+          var p1 = Array.from(pointers.values())[0];
+          var p2 = Array.from(pointers.values())[1];
+          pinchState = {
+            lastDist: Math.hypot(p2.x - p1.x, p2.y - p1.y),
+            lastCx: (p1.x + p2.x) / 2,
+            lastCy: (p1.y + p2.y) / 2
+          };
+          dragState = null;
+        }
+      });
+
+      window.addEventListener('pointermove', function (e) {
+        if (!pointers.has(e.pointerId)) return;
+
+        if (pointers.size === 1 && dragState) {
+          var dx = e.clientX - dragState.startX;
+          var dy = e.clientY - dragState.startY;
+          if (!dragState.moved && Math.hypot(dx, dy) > DRAG_THRESHOLD) {
+            dragState.moved = true;
+            suppressClick = true;
+            svg.classList.add('dragging');
+          }
+          if (dragState.moved) {
+            var start = toViewBox(dragState.startX, dragState.startY);
+            var cur = toViewBox(e.clientX, e.clientY);
+            tx = dragState.origTx + (cur.x - start.x);
+            ty = dragState.origTy + (cur.y - start.y);
+            applyTransform();
+          }
+          pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+        } else if (pointers.size === 2 && pinchState) {
+          pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+          var q1 = Array.from(pointers.values())[0];
+          var q2 = Array.from(pointers.values())[1];
+          var dist = Math.hypot(q2.x - q1.x, q2.y - q1.y);
+          var cx = (q1.x + q2.x) / 2;
+          var cy = (q1.y + q2.y) / 2;
+
+          if (pinchState.lastDist > 0) {
+            var ratio = dist / pinchState.lastDist;
+            var prevMid = toViewBox(pinchState.lastCx, pinchState.lastCy);
+            var curMid = toViewBox(cx, cy);
+            tx += curMid.x - prevMid.x;
+            ty += curMid.y - prevMid.y;
+            zoomAt(scale * ratio, curMid.x, curMid.y);
+          }
+          pinchState.lastDist = dist;
+          pinchState.lastCx = cx;
+          pinchState.lastCy = cy;
+        }
+      });
+
+      function endPointer(e) {
+        var wasDrag = dragState ? dragState.moved : false;
+        pointers.delete(e.pointerId);
+
+        if (pointers.size === 0) {
+          if (wasDrag) {
+            suppressClick = true;
+            clearTimeout(suppressTimer);
+            suppressTimer = setTimeout(function () { suppressClick = false; }, 800);
+          }
+          dragState = null;
+          pinchState = null;
+          svg.classList.remove('dragging');
+        } else if (pointers.size === 2) {
+          var a = Array.from(pointers.values());
+          pinchState = {
+            lastDist: Math.hypot(a[1].x - a[0].x, a[1].y - a[0].y),
+            lastCx: (a[0].x + a[1].x) / 2,
+            lastCy: (a[0].y + a[1].y) / 2
+          };
+          dragState = null;
+        } else if (pointers.size === 1) {
+          pinchState = null;
+          var p = Array.from(pointers.values())[0];
+          dragState = {
+            startX: p.x,
+            startY: p.y,
+            origTx: tx,
+            origTy: ty,
+            moved: false
+          };
+        }
+      }
+
+      window.addEventListener('pointerup', endPointer);
+      window.addEventListener('pointercancel', endPointer);
+
+      // Drop any stuck interaction state if the window loses focus mid-drag.
+      window.addEventListener('blur', function () {
+        pointers.clear();
+        dragState = null;
+        pinchState = null;
+        svg.classList.remove('dragging');
+      });
+
+      // Plain clicks still navigate, but a click that follows a drag does not.
+      svg.addEventListener('click', function (e) {
+        if (suppressClick) {
+          e.preventDefault();
+          e.stopPropagation();
+          clearTimeout(suppressTimer);
+          suppressClick = false;
+        }
+      }, true);
+
+      // --- reset view button ---
+      if (resetBtn) {
+        resetBtn.addEventListener('click', function () {
+          tx = 0;
+          ty = 0;
+          scale = 1;
+          applyTransform();
+        });
+      }
+
+      applyTransform();
+    })();
+  </script>
 </body>
 </html>
