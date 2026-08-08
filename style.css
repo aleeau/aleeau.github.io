@@ -34,31 +34,35 @@ body {
 
 .container {
   flex: 1;
-  max-width: 60rem;
-  margin: 0 auto;
-  padding: 2rem 1rem;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .container h2 {
   font-size: 1.5rem;
-  margin-bottom: 1.5rem;
+  margin: 0 auto;
+  padding: 2rem 1rem 1.25rem;
+  max-width: 60rem;
+  width: 100%;
   color: #24292e;
 }
 
-/* Bubble constellation scene — fills the full width under "My Projects" */
+/* Bubble constellation scene — fills the full page between header and footer */
 .bubble-scene {
   position: relative;
+  flex: 1;
+  min-height: 60vh;
   background: #e9eef5;
-  border: 1px solid #d5dde8;
-  border-radius: 12px;
-  padding: 1rem;
   overflow: hidden;
 }
 
 .bubble-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
   touch-action: none;
   user-select: none;
@@ -68,6 +72,12 @@ body {
 
 .bubble-svg.dragging {
   cursor: grabbing;
+}
+
+@media (max-width: 640px) {
+  .bubble-scene {
+    min-height: 75vh;
+  }
 }
 
 /* floating reset button for the pannable / zoomable canvas */
@@ -94,7 +104,7 @@ body {
 
 /* connecting lines — solid and clearly visible, tinted per bubble */
 .link-line {
-  stroke-width: 3;
+  stroke-width: 4.5;
   stroke-linecap: round;
 }
 
@@ -109,7 +119,7 @@ body {
 }
 
 .center-label {
-  font-size: 36px;
+  font-size: 54px;
   font-weight: 700;
   letter-spacing: 1px;
   fill: #1e293b;
@@ -148,14 +158,14 @@ body {
 }
 
 .bubble-label {
-  font-size: 19px;
+  font-size: 28px;
   font-weight: 600;
   fill: #1e293b;
   font-family: inherit;
 }
 
 .bubble-num {
-  font-size: 24px;
+  font-size: 36px;
   font-weight: 700;
 }
 

@@ -16,7 +16,7 @@
     <h2>My Projects</h2>
     <div class="bubble-scene">
       <button class="scene-reset" type="button">Reset view</button>
-      <svg class="bubble-svg" viewBox="0 0 800 600" role="group"
+      <svg class="bubble-svg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid meet" role="group"
            aria-label="Projects constellation: Project 1 and Project 2 float around a central Projects bubble. Drag to pan, scroll or pinch to zoom.">
         <defs>
           <!-- translucent tinted fills: transparent center, colored hue toward the rim -->
@@ -46,39 +46,41 @@
 
         <!-- everything inside #scene is pannable / zoomable -->
         <g id="scene">
-          <!-- connecting lines (drawn behind the bubbles, rim to rim) -->
-          <line class="link-line link-1" x1="400" y1="195" x2="400" y2="116" />
-          <line class="link-line link-2" x1="400" y1="405" x2="400" y2="484" />
+          <!-- connecting lines (drawn behind the bubbles, rim to rim).
+               A requestAnimationFrame loop in the script keeps them glued
+               to the moving bubbles, so these are just initial values. -->
+          <line class="link-line link-1" x1="506" y1="253" x2="310" y2="155" />
+          <line class="link-line link-2" x1="694" y1="347" x2="890" y2="445" />
 
           <!-- central "Projects" bubble: faster breathing + gentle left/right drift -->
-          <g transform="translate(400, 300)">
+          <g transform="translate(600, 300)">
             <g>
               <animateTransform attributeName="transform" type="translate"
-                values="0 0; 22 0; 0 0; -22 0; 0 0" dur="4.5s" repeatCount="indefinite" />
+                values="0 0; 33 0; 0 0; -33 0; 0 0" dur="4.5s" repeatCount="indefinite" />
               <g class="center-bubble">
                 <animateTransform attributeName="transform" type="scale" values="1; 1.05; 1" dur="2.4s" repeatCount="indefinite" />
-                <circle cx="0" cy="0" r="105" fill="url(#centerGrad)" stroke="rgba(124,58,237,0.55)" stroke-width="2.5" />
+                <circle cx="0" cy="0" r="105" fill="url(#centerGrad)" stroke="rgba(124,58,237,0.55)" stroke-width="4" />
                 <ellipse cx="-38" cy="-48" rx="44" ry="28" fill="url(#glossGrad)" />
                 <text class="center-label" x="0" y="0" text-anchor="middle" dominant-baseline="central">Projects</text>
               </g>
             </g>
           </g>
 
-          <!-- Project 1: drifts left/right (outer group) and floats up/down (inner group), faster -->
+          <!-- Project 1: drifts left/right (outer group) and floats up/down (inner group) -->
           <a class="bubble-link" href="/project-1/" aria-label="Visit Project 1 site">
             <g class="bubble-drift">
               <animateTransform attributeName="transform" type="translate"
-                values="0 0; 34 0; 0 0; -34 0; 0 0" dur="3.8s" begin="0.8s" repeatCount="indefinite" />
+                values="0 0; 51 0; 0 0; -51 0; 0 0" dur="3.8s" begin="0.8s" repeatCount="indefinite" />
               <g class="bubble bubble-1">
                 <animateTransform attributeName="transform" type="translate"
-                  values="0 0; 0 -16; 0 0" dur="2.1s" begin="0.2s" repeatCount="indefinite" />
-                <circle class="focus-ring" cx="400" cy="60" r="62" fill="none" stroke="#1d4ed8" stroke-width="3" opacity="0" />
+                  values="0 0; 0 -24; 0 0" dur="2.1s" begin="0.2s" repeatCount="indefinite" />
+                <circle class="focus-ring" cx="260" cy="130" r="62" fill="none" stroke="#1d4ed8" stroke-width="4.5" opacity="0" />
                 <g class="bubble-visual">
-                  <circle class="bubble-circle" cx="400" cy="60" r="56" fill="url(#projGrad1)" stroke="rgba(6,182,212,0.6)" stroke-width="2.5" />
-                  <ellipse class="bubble-gloss" cx="378" cy="32" rx="26" ry="16" fill="url(#glossGrad)" />
+                  <circle class="bubble-circle" cx="260" cy="130" r="56" fill="url(#projGrad1)" stroke="rgba(6,182,212,0.6)" stroke-width="4" />
+                  <ellipse class="bubble-gloss" cx="238" cy="102" rx="26" ry="16" fill="url(#glossGrad)" />
                   <text class="bubble-label" text-anchor="middle" dominant-baseline="central">
-                    <tspan x="400" y="48">Project</tspan>
-                    <tspan class="bubble-num" x="400" y="74">1</tspan>
+                    <tspan x="260" y="117">Project</tspan>
+                    <tspan class="bubble-num" x="260" y="143">1</tspan>
                   </text>
                 </g>
               </g>
@@ -89,17 +91,17 @@
           <a class="bubble-link" href="/project-2/" aria-label="Visit Project 2 site">
             <g class="bubble-drift">
               <animateTransform attributeName="transform" type="translate"
-                values="0 0; -28 0; 0 0; 28 0; 0 0" dur="5.1s" begin="1.6s" repeatCount="indefinite" />
+                values="0 0; -42 0; 0 0; 42 0; 0 0" dur="5.1s" begin="1.6s" repeatCount="indefinite" />
               <g class="bubble bubble-2">
                 <animateTransform attributeName="transform" type="translate"
-                  values="0 0; 0 -16; 0 0" dur="2.6s" begin="1.1s" repeatCount="indefinite" />
-                <circle class="focus-ring" cx="400" cy="540" r="62" fill="none" stroke="#1d4ed8" stroke-width="3" opacity="0" />
+                  values="0 0; 0 -24; 0 0" dur="2.6s" begin="1.1s" repeatCount="indefinite" />
+                <circle class="focus-ring" cx="940" cy="470" r="62" fill="none" stroke="#1d4ed8" stroke-width="4.5" opacity="0" />
                 <g class="bubble-visual">
-                  <circle class="bubble-circle" cx="400" cy="540" r="56" fill="url(#projGrad2)" stroke="rgba(236,72,153,0.6)" stroke-width="2.5" />
-                  <ellipse class="bubble-gloss" cx="378" cy="512" rx="26" ry="16" fill="url(#glossGrad)" />
+                  <circle class="bubble-circle" cx="940" cy="470" r="56" fill="url(#projGrad2)" stroke="rgba(236,72,153,0.6)" stroke-width="4" />
+                  <ellipse class="bubble-gloss" cx="918" cy="442" rx="26" ry="16" fill="url(#glossGrad)" />
                   <text class="bubble-label" text-anchor="middle" dominant-baseline="central">
-                    <tspan x="400" y="528">Project</tspan>
-                    <tspan class="bubble-num" x="400" y="554">2</tspan>
+                    <tspan x="940" y="457">Project</tspan>
+                    <tspan class="bubble-num" x="940" y="483">2</tspan>
                   </text>
                 </g>
               </g>
@@ -111,7 +113,7 @@
   </main>
 
   <footer class="site-footer">
-    <p>&copy; 2026 aleeau &middot; <a href="https://github.com/aleeau">GitHub</a></p>
+    <p>&#169; 2026 aleeau &middot; <a href="https://github.com/aleeau">GitHub</a></p>
   </footer>
 
   <script>
@@ -288,6 +290,52 @@
           suppressClick = false;
         }
       }, true);
+
+      // --- keep the connecting lines glued to the moving bubbles ---
+      var link1 = document.querySelector('.link-1');
+      var link2 = document.querySelector('.link-2');
+      var centerCircle = document.querySelector('.center-bubble circle');
+      var p1Circle = document.querySelector('.bubble-1 .bubble-circle');
+      var p2Circle = document.querySelector('.bubble-2 .bubble-circle');
+      var CENTER_R = 105;
+      var PROJ_R = 56;
+
+      function getCenter(el, inv) {
+        var r = el.getBoundingClientRect();
+        pt.x = r.left + r.width / 2;
+        pt.y = r.top + r.height / 2;
+        var p = pt.matrixTransform(inv);
+        return { x: p.x, y: p.y };
+      }
+
+      // Draw a line rim-to-rim between bubble centers a and b.
+      function setRimLine(line, a, b, ra, rb) {
+        var dx = b.x - a.x;
+        var dy = b.y - a.y;
+        var len = Math.sqrt(dx * dx + dy * dy) || 1;
+        var ux = dx / len;
+        var uy = dy / len;
+        line.setAttribute('x1', a.x + ux * ra);
+        line.setAttribute('y1', a.y + uy * ra);
+        line.setAttribute('x2', b.x - ux * rb);
+        line.setAttribute('y2', b.y - uy * rb);
+      }
+
+      function updateLines() {
+        if (!link1 || !link2) return;
+        var inv = svg.getScreenCTM().inverse();
+        var c = getCenter(centerCircle, inv);
+        var p1 = getCenter(p1Circle, inv);
+        var p2 = getCenter(p2Circle, inv);
+        setRimLine(link1, c, p1, CENTER_R, PROJ_R);
+        setRimLine(link2, c, p2, CENTER_R, PROJ_R);
+      }
+
+      function frame() {
+        updateLines();
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
 
       // --- reset view button ---
       if (resetBtn) {
